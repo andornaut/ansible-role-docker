@@ -1,0 +1,55 @@
+---
+- name: Uninstall python-docker system package (workaround)
+  apt:
+    name: python-docker
+    state: absent
+  become: true
+
+- name: Uninstall docker-py python package (workaround)
+  pip:
+    name: docker-py
+    state: absent
+  become: true
+
+- name: Add Docker apt key
+  apt_key:
+    id: F76221572C52609D
+    url: 'https://apt.dockerproject.org/gpg'
+    state: present
+  become: true
+
+- name: Add Docker apt repository
+  apt_repository:
+    repo: "deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main"
+    update_cache: yes
+  become: true
+
+- name: Install Docker system packages
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - docker-ce
+    - python-yaml
+  become: true
+
+- name: Install Docker Python package
+  pip:
+    name: docker
+    state: present
+  become: true
+
+- name: Start Docker on boot
+  systemd:
+    name: docker
+    daemon_reload: yes
+    state: started
+    enabled: yes
+  become: true
+
+- name: Install docker-compose
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64"
+    dest: /usr/local/bin/docker-compose
+    mode: 0755
+  become: true

@@ -1,0 +1,10 @@
+---
+galaxy_info:
+  author: andornaut
+  description: Docker CE
+  license: MIT
+  min_ansible_version: 1.2
+  galaxy_tags:
+    - docker
+
+dependencies: []
