@@ -1,10 +1,9 @@
 ---
 galaxy_info:
   author: andornaut
-  description: Docker CE
+  description: Docker CE on Ubuntu
   license: MIT
-  min_ansible_version: 1.2
+  min_ansible_version: 2.0
   galaxy_tags:
     - docker
 
-dependencies: []
