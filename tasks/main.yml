@@ -13,14 +13,13 @@
 
 - name: Add Docker apt key
   apt_key:
-    id: F76221572C52609D
-    url: 'https://apt.dockerproject.org/gpg'
+    url: 'https://download.docker.com/linux/ubuntu/gpg'
     state: present
   become: true
 
 - name: Add Docker apt repository
   apt_repository:
-    repo: "deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main"
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
     update_cache: yes
   become: true
 
