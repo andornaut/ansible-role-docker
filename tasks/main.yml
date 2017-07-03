@@ -6,9 +6,19 @@
   become: true
 
 - name: Uninstall docker-py python package (workaround)
+  # https://github.com/ansible/ansible/issues/20492
   pip:
     name: docker-py
     state: absent
+  become: true
+
+- name: Install Docker Python packages
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - docker
+    - docker-compose
   become: true
 
 - name: Add Docker apt key
@@ -30,12 +40,6 @@
   with_items:
     - docker-ce
     - python-yaml
-  become: true
-
-- name: Install Docker Python package
-  pip:
-    name: docker
-    state: present
   become: true
 
 - name: Start Docker on boot
