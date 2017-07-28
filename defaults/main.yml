@@ -1,2 +1,5 @@
 ---
 docker_compose_version: 1.13.0
+docker_registry_image: distribution/registry:master
+docker_registry_port: 5000
+docker_registry_volume: /var/docker-volumes/docker-registry

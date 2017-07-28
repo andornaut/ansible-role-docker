@@ -56,3 +56,5 @@
     dest: /usr/local/bin/docker-compose
     mode: 0755
   become: true
+
+- include: docker-registry.yml

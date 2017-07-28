@@ -1,0 +1,13 @@
+[Unit]
+Description=Docker Registry
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=simple
+ExecStartPre=-/usr/bin/docker rm registry
+ExecStartPre=/usr/bin/docker pull {{ docker_registry_image }}
+ExecStart=/usr/bin/docker run -p {{ docker_registry_port }}:5000 -v {{ docker_registry_volume }}:/var/lib/registry --name registry {{ docker_registry_image }}
+
+[Install]
+WantedBy=multi-user.target

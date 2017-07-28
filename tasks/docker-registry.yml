@@ -1,0 +1,28 @@
+---
+- name: install python-passlib
+  apt:
+    name: python-passlib
+    update_cache: yes
+  become: true
+
+- name: create docker volume directory
+  file:
+    path: "{{ docker_registry_volume }}"
+    state: directory
+    mode: 0775
+  become: true
+
+- name: copy docker-registry systemd unit file
+  template:
+    src: docker-registry.service
+    dest: /etc/systemd/system/
+  become: true
+  notify: restart docker-registry
+
+- name: start docker-registry on boot
+  systemd:
+    name: docker-registry
+    daemon_reload: yes
+    state: started
+    enabled: yes
+  become: true
