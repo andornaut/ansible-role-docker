@@ -7,7 +7,7 @@ An [Ansible](https://www.ansible.com/) role that installs
 
 ## Variables
 
-See [default values](./defaults/main.yml)
+See [default values](./defaults/main.yml).
 
 Name|Description
 ---|---
