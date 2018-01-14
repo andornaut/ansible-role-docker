@@ -57,4 +57,5 @@
     mode: 0755
   become: true
 
-- include: docker-registry.yml
+- import_tasks: docker-registry.yml
+
