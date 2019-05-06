@@ -14,11 +14,8 @@
 
 - name: Install Docker Python packages
   pip:
-    name: "{{ item }}"
+    name: docker
     state: present
-  with_items:
-    - docker
-    - docker-compose
   become: true
 
 - name: Add Docker apt key
@@ -38,8 +35,8 @@
     name: "{{ item }}"
     state: latest
   with_items:
+    - docker-compose
     - docker-ce
-    - python-yaml
   become: true
 
 - name: Start Docker on boot
@@ -48,13 +45,6 @@
     daemon_reload: yes
     state: started
     enabled: yes
-  become: true
-
-- name: Install docker-compose
-  get_url:
-    url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64"
-    dest: /usr/local/bin/docker-compose
-    mode: 0755
   become: true
 
 - import_tasks: docker-registry.yml
