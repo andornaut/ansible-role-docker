@@ -16,7 +16,6 @@
   apt_key:
     url: 'https://download.docker.com/linux/ubuntu/gpg'
     state: present
-    update_cache: yes
   become: true
 
 - name: Add Docker apt repository
