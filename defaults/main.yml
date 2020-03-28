@@ -1,5 +1,4 @@
 ---
-docker_compose_version: 1.18.0
 docker_registry_image: registry:2
 docker_registry_port: 5000
 docker_registry_volume: /var/docker-volumes/docker-registry

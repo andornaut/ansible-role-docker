@@ -11,7 +11,6 @@ See [default values](./defaults/main.yml).
 
 Name|Description
 ---|---
-docker_compose_version|See the [github releases page](https://github.com/docker/compose/releases)
 docker_registry_image|Official [registry image](https://hub.docker.com/_/registry/)
 docker_registry_port|Port on host to which to bind
 docker_registry_volume|Directory on host in which to store persistent files
