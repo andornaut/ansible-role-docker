@@ -2,10 +2,7 @@
 - name: Uninstall docker-py python package (workaround)
   # https://github.com/ansible/ansible/issues/20492
   pip:
-    name:
-      - docker
-      - docker-compose
-      - docker-py
+    name: docker-py
     state: absent
   become: true
 
@@ -31,8 +28,8 @@
 - name: Install Docker system packages
   apt:
     name:
+      - docker-compose
       - docker-ce
-      - python-yaml
     state: latest
   become: true
 
@@ -44,6 +41,4 @@
     enabled: yes
   become: true
 
-- import_tasks: docker-compose.yml
 - import_tasks: docker-registry.yml
-
