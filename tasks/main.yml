@@ -12,23 +12,12 @@
     state: absent
   become: true
 
-- name: Add Docker apt key
-  apt_key:
-    url: 'https://download.docker.com/linux/ubuntu/gpg'
-    state: present
-  become: true
-
-- name: Add Docker apt repository
-  apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
-    update_cache: yes
-  become: true
-
 - name: Install Docker system packages
   apt:
     name:
+      - docker.io
       - docker-compose
-      - docker-ce
+      - docker-registry
     state: latest
   become: true
 
@@ -40,4 +29,10 @@
     enabled: yes
   become: true
 
-- import_tasks: docker-registry.yml
+- name: Start Docker Registry on boot
+  systemd:
+    name: docker-registry
+    daemon_reload: yes
+    state: started
+    enabled: yes
+  become: true
