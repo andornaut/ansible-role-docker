@@ -1,38 +1,5 @@
 ---
-- name: Uninstall docker-py python package (workaround)
-  # https://github.com/ansible/ansible/issues/20492
-  pip:
-    name: docker-py
-    state: absent
-  become: true
+- import_tasks: docker.yml
 
-- name: Uninstall python-docker system package (workaround)
-  apt:
-    name: python-docker
-    state: absent
-  become: true
-
-- name: Install Docker system packages
-  apt:
-    name:
-      - docker.io
-      - docker-compose
-      - docker-registry
-    state: latest
-  become: true
-
-- name: Start Docker on boot
-  systemd:
-    name: docker
-    daemon_reload: yes
-    state: started
-    enabled: yes
-  become: true
-
-- name: Start Docker Registry on boot
-  systemd:
-    name: docker-registry
-    daemon_reload: yes
-    state: started
-    enabled: yes
-  become: true
+- import_tasks: kubernetes.yml
+  when: docker_install_kubernetes
