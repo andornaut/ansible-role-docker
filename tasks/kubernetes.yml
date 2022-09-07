@@ -1,7 +1,13 @@
 ---
+- name: Get the latest version of helm
+  uri:
+    url: https://api.github.com/repos/helm/helm/releases/latest
+    return_content: "yes"
+  register: helm_version
+
 - name: Install helm
   unarchive:
-    src: "https://get.helm.sh/helm-{{ docker_helm_version }}-linux-amd64.tar.gz"
+    src: https://get.helm.sh/helm-{{ helm_version.json.tag_name }}-linux-amd64.tar.gz
     dest: /usr/local/bin/
     extra_opts:
       - '--strip-components=1'
