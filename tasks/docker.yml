@@ -1,11 +1,4 @@
 ---
-- name: Uninstall docker-py python package (workaround)
-  # https://github.com/ansible/ansible/issues/20492
-  pip:
-    name: docker-py
-    state: absent
-  become: true
-
 - name: Uninstall python-docker system package (workaround)
   apt:
     name: python-docker
