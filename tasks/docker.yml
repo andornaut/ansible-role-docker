@@ -1,7 +1,7 @@
 ---
 - name: Uninstall docker-py system package (workaround)
   apt:
-    name: python-docker
+    name: python3-docker
     state: absent
   become: true
 
